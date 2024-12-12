@@ -1,0 +1,14 @@
+.plantCard {
+    padding: 5px;
+}
+
+.plantCard:hover {
+    background-color: #FDFDFD;
+}
+.plantCard:hover img {
+    opacity: 0.9;
+}
+
+.plantCard:hover p {
+    color: #008000;
+}

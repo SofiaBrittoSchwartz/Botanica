@@ -1,0 +1,82 @@
+.hamburger {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: black;
+}
+
+.image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 75px;
+    overflow: hidden;
+    position: relative;
+    flex: 1;
+}
+
+.image-wrapper img {
+    width: 30%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: none;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #00ff00;
+}
+
+.nav-links.open {
+    display: block;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    text-align: center;
+}
+
+.searchIcon {
+    width: 25px;
+    height: auto;
+    cursor: pointer;
+}
+
+.stickyNavBar {
+    padding-top: 10px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+}
