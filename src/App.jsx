@@ -16,7 +16,7 @@ function App() {
           <Route path='/' element={<PlantList/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
-          <Route path='/plantinfo' element={<PlantInfo/>}/>
+          <Route path='/plantinfo/:id' element={<PlantInfo/>}/>
         </Routes>
       </BrowserRouter>
     </>

@@ -12,8 +12,8 @@ const PlantList = () => {
         loadPlants();
     }, []);
 
-    function handleClick() {
-        navigate('/plantinfo');
+    function handleClick(plant) {
+        navigate(`/plantinfo/${plant['id']}`, {state: {plant: plant}});
     }
 
     async function loadPlants() {
@@ -40,7 +40,7 @@ const PlantList = () => {
             <div className="plantList">
             {
                 plantList.map((plant) => (
-                    <PlantCard plant={plant} key={plant['id']} onChildClick={handleClick}/>
+                    <PlantCard plant={plant} key={plant['id']} onChildClick={() => handleClick(plant)}/>
                 ))
             }
             </div>
