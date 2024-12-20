@@ -5,6 +5,7 @@ import NavBar from './components/NavBar/NavBar'
 import Login from './components/Login/Login'
 import SignUp from './components/SignUp/SignUp'
 import PlantInfo from './components/PlantInfo/PlantInfo'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
