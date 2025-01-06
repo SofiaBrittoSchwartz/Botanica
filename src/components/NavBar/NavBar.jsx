@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import BotanicaLogo from '../../assets/BotanicaLogo.png'
 import SearchIcon from '../../assets/search_icon.svg'
+import { Link } from 'react-router-dom'
 import './NavBar.css'
 
 const NavBar = () => {
@@ -10,19 +11,15 @@ const NavBar = () => {
         setIsOpen(!isOpen);
     }
 
-    const navStyle = {
-        width: '100%'
-    }
-
     return (
         <div className='stickyNavBar'>
             <div className='navBar'>
                 <div className='menu'>
                     <button className='hamburger' onClick={toggleMenu}>☰</button>
                     <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
-                        <li><a href="#plantList">Plant List</a></li>
-                        <li><a href="#myGarden">My Garden</a></li>
-                        <li><a href="#settings">Settings</a></li>
+                        <li><Link to={'/'}>Plant List</Link></li>
+                        <li><Link to={'/myGarden'}>My Garden</Link></li>
+                        <li><Link to={'/settings'}>Settings</Link></li>
                     </ul>
                 </div>
                 <div className='image-wrapper'>

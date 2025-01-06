@@ -5,6 +5,8 @@ import NavBar from './components/NavBar/NavBar'
 import Login from './components/Login/Login'
 import SignUp from './components/SignUp/SignUp'
 import PlantInfo from './components/PlantInfo/PlantInfo'
+import MyGarden from './components/MyGarden/MyGarden'
+import Settings from './components/Settings/Settings'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/plantinfo/:id' element={<PlantInfo/>}/>
+          <Route path='/mygarden' element={<MyGarden/>}/>
+          <Route path='/settings' element={<Settings/>}/>
         </Routes>
       </BrowserRouter>
     </>
