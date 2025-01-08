@@ -51,7 +51,9 @@ const NavBar = () => {
                 <Link to={'/myGarden'}>
                     <img src={GardenIcon} className="navBar-gardenIcon" alt="Garden Icon"/>
                 </Link>
-                <img src={CartIcon} className="navBar-cartIcon" alt="Cart Icon"/>
+                <Link to={'/cart'}>
+                    <img src={CartIcon} className="navBar-cartIcon" alt="Cart Icon"/>
+                </Link>
                 <img src={SearchIcon} className="navBar-searchIcon" alt="Search Icon"/>
             </div>
         </div>

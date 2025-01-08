@@ -6,6 +6,7 @@ import Login from './components/Login/Login'
 import SignUp from './components/SignUp/SignUp'
 import PlantInfo from './components/PlantInfo/PlantInfo'
 import MyGarden from './components/MyGarden/MyGarden'
+import Cart from './components/Cart/Cart'
 import Settings from './components/Settings/Settings'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -21,6 +22,7 @@ function App() {
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/plantinfo/:id' element={<PlantInfo/>}/>
           <Route path='/mygarden' element={<MyGarden/>}/>
+          <Route path='/cart' element={<Cart/>}/>
           <Route path='/settings' element={<Settings/>}/>
         </Routes>
       </BrowserRouter>
