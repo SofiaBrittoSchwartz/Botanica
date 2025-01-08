@@ -1,38 +1,34 @@
-.hamburger {
+.navBar-hamburger {
     font-size: 2rem;
     background: none;
     border: none;
     color: black;
+    display: none;
 }
 
-.image-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.navBar-image-wrapper {
     width: 100px;
-    height: 75px;
+    height: 106px;
     overflow: hidden;
     position: relative;
     flex: 1;
 }
 
-.image-wrapper img {
-    width: 30%;
-    height: auto;
+.navBar-image-wrapper img {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 150px; 
+    height: auto;
     object-fit: cover;
+    cursor: pointer;
 }
 
-.menu {
+.navBar-menu {
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-.navBar {
+.navBar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,43 +36,92 @@
     padding: 0 1rem;
 }
 
-.nav-links {
+.navBar-left,
+.navBar-center,
+.navBar-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navBar-left {
+    justify-content: flex-start;
+}
+
+.navBar-right {
+    justify-content: flex-end;
+}
+
+.navBar-links {
     list-style: none;
-    display: none;
+    display: flex;
     gap: 1rem;
     margin: 0;
     padding: 0;
+    font-size: larger;
+    cursor: pointer;
 }
 
-.nav-links li a {
-    text-decoration: none;
-    color: black;
-    transition: color 0.3s;
+.navBar-links li {
+    width: fit-content;
+    text-align: left;
 }
 
-.nav-links li a:hover {
-    color: #00ff00;
+.navBar-links li p:hover {
+    color: #228B22;
 }
 
-.nav-links.open {
+.navBar-links.open {
     display: block;
+    position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     padding: 1rem;
-    text-align: center;
+    text-align: left;
+    background-color: white;
 }
 
-.searchIcon {
-    width: 25px;
+.navBar-searchIcon {
+    width: 27px;
     height: auto;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.navBar-gardenIcon {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.navBar-cartIcon {
+    width: 50px;
+    margin-right: 10px;
     cursor: pointer;
 }
 
-.stickyNavBar {
-    padding-top: 10px;
+.navBar-sticky {
+    padding-top: 5px;
     position: sticky;
     top: 0;
     background-color: white;
     z-index: 100;
+}
+
+/* Media Query for Responsive Behavior */
+@media (max-width: 768px) {
+    .navBar-hamburger {
+        display: block; /* Show hamburger menu */
+    }
+
+    .navBar-links {
+        display: none; /* Hide full menu by default */
+    }
+
+    .navBar-links.open {
+        display: block; /* Show full menu when hamburger is toggled */
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 }

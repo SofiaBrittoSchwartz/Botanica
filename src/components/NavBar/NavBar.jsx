@@ -1,37 +1,64 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import BotanicaLogo from '../../assets/BotanicaLogo.png'
 import SearchIcon from '../../assets/search_icon.svg'
-import { Link } from 'react-router-dom'
+import CartIcon from '../../assets/cart_icon.png'
+import GardenIcon from '../../assets/garden_icon.png'
+import { Link, useNavigate } from 'react-router-dom'
 import './NavBar.css'
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+    const menuRef = useRef(null);
+    const hamburgerRef = useRef(null);
+
+    useEffect(() => {
+        document.addEventListener('mousedown', closeMenu);
+        return () => {
+            document.removeEventListener('mousedown', closeMenu);
+        }
+    }, []);
 
     const toggleMenu = () => {
-        setIsOpen(!isOpen);
+        setIsOpen((prev) => !prev);
+    }
+
+    const closeMenu = (e) => {
+        if(menuRef.current && !menuRef.current.contains(e.target) && e.target !== hamburgerRef.current) {
+            setIsOpen(false);
+        }
+    }
+
+    const onMenuClick = (path) => {
+        toggleMenu();
+        navigate(path);
     }
 
     return (
-        <div className='stickyNavBar'>
-            <div className='navBar'>
-                <div className='menu'>
-                    <button className='hamburger' onClick={toggleMenu}>☰</button>
-                    <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
-                        <li><Link to={'/'}>Plant List</Link></li>
-                        <li><Link to={'/myGarden'}>My Garden</Link></li>
-                        <li><Link to={'/settings'}>Settings</Link></li>
-                    </ul>
-                </div>
-                <div className='image-wrapper'>
-                    <img src={BotanicaLogo}/>
-                </div>
-                <div style={{textAlign: 'right'}}>
-                    <img src={SearchIcon} className="searchIcon"/>
-                </div>
+    <div className='navBar-sticky'>
+        <div className='navBar-container'>
+            <div className='navBar-menu navBar-left'>
+                <button className='navBar-hamburger' onClick={toggleMenu} ref={hamburgerRef}>☰</button>
+                <ul className={`navBar-links ${isOpen ? 'open' : ''}`} ref={menuRef}>
+                    <li onClick={() => onMenuClick('/')}><p>Plant List</p></li>
+                    <li onClick={() => onMenuClick('/settings')}><p>Settings</p></li>
+                </ul>
             </div>
-            <hr/>
+            <div className='navBar-image-wrapper navBar-center'>
+                <img src={BotanicaLogo} onClick={() => navigate('/')} alt="Botanica Logo"/>
+            </div>
+            <div className='navBar-right'>
+                <Link to={'/myGarden'}>
+                    <img src={GardenIcon} className="navBar-gardenIcon" alt="Garden Icon"/>
+                </Link>
+                <img src={CartIcon} className="navBar-cartIcon" alt="Cart Icon"/>
+                <img src={SearchIcon} className="navBar-searchIcon" alt="Search Icon"/>
+            </div>
         </div>
-    )
+        <hr style={{marginTop: '0.5rem'}}/>
+    </div>
+    );
+
 }
 
-export default NavBar
+export default NavBar;
