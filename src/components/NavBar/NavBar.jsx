@@ -45,14 +45,14 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className='navBar-image-wrapper navBar-center'>
-                <img src={BotanicaLogo} onClick={() => navigate('/')} alt="Botanica Logo"/>
+                <img src={BotanicaLogo} onClick={() => navigate('/')} alt="Botanica written in light green in front of two monstera leaves all encompassed by a light green circle"/>
             </div>
             <div className='navBar-right'>
                 <Link to={'/myGarden'}>
-                    <img src={GardenIcon} className="navBar-gardenIcon" alt="Garden Icon"/>
+                    <img src={GardenIcon} className="navBar-gardenIcon" alt="Icon of a watering can over a small plant"/>
                 </Link>
                 <Link to={'/cart'}>
-                    <img src={CartIcon} className="navBar-cartIcon" alt="Cart Icon"/>
+                    <img src={CartIcon} className="navBar-cartIcon" alt="Icon of a shopping cart"/>
                 </Link>
                 <img src={SearchIcon} className="navBar-searchIcon" alt="Search Icon"/>
             </div>
