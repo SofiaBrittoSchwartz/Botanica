@@ -1,27 +1,50 @@
-import React from 'react'
-import './PlantCard.css'
+import React, { useState, useEffect } from 'react';
+import './PlantCard.css';
 
 const PlantCard = (props) => {
     const plant = props.plant;
 
-    function getImageThumbnail(plant) {
-        try {
-            const thumbnail = plant['default_image']['thumbnail'];
-            if (thumbnail != null) return thumbnail;
-            else return 'https://placehold.co/200x200?text=This%20is%20a%20tree';
-        } catch (e) {
-            console.log(`Error: `,e);
-            console.log(JSON.stringify(plant));
-            return 'https://placehold.co/200x200?text=This%20is%20a%20plant';
-        }
+    const [maxWidth, setMaxWidth] = useState(200);
+
+    useEffect(() => {
+            setMaxWidth(plant.width);
+    }, []);
+
+    function getThumbnail(plant) {
+        const thumbnail = plant?.default_image?.thumbnail;
+
+        if(!thumbnail) console.info(`Warning: The image for the ${plant.common_name} was not found.`);
+
+        return thumbnail || 'https://placehold.co/200x200?text=This%20is%20a%20tree';
     }
 
     return (
-        <div className="plantCard" key={plant['id']} onClick={props.onChildClick} style={{cursor: 'Pointer'}}>
-            <img src={getImageThumbnail(plant)}></img>
-            <p>{plant['common_name']}</p>
+        <div 
+            className="plantCard" 
+            key={plant.id} 
+            onClick={props.onChildClick} 
+            style={{maxWidth: `${maxWidth}px`}}
+        >
+            <img 
+                className="plantCard-image" 
+                src={getThumbnail(plant)} 
+                alt="Plant thumbnail"
+            />
+            <div className="plantCard-info">
+                <h5>{plant.common_name}</h5>
+                <div>
+                    <div className="plantCard-btn-container">
+                        <button className="plantCard-add-button" aria-label="Add to Cart">+</button>
+                        <span>Add to Cart</span>
+                    </div>
+                    <div className="plantCard-btn-container">
+                        <button className="plantCard-add-button" aria-label="Add to Garden">+</button>
+                        <span>Add to Garden</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    )
-}
+    );
+};
 
-export default PlantCard
+export default PlantCard;
