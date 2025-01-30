@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
-import BotanicaLogo from '../../assets/BotanicaLogo.png'
-import SearchIcon from '../../assets/search_icon.svg'
-import CartIcon from '../../assets/cart_icon.png'
-import GardenIcon from '../../assets/garden_icon.png'
-import { Link, useNavigate } from 'react-router-dom'
-import './NavBar.css'
+import React, { useState, useEffect, useRef } from 'react';
+import BotanicaLogo from '../../assets/BotanicaLogo.png';
+import SearchIcon from '../../assets/search_icon.svg';
+import CartIcon from '../../assets/cart_icon.png';
+import GardenIcon from '../../assets/garden_icon.png';
+import { Link, useNavigate } from 'react-router-dom';
+import './NavBar.css';
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,26 +13,26 @@ const NavBar = () => {
     const hamburgerRef = useRef(null);
 
     useEffect(() => {
-        document.addEventListener('mousedown', closeMenu);
+        document.addEventListener('mousedown', closeMenuOnOutsideClick);
         return () => {
-            document.removeEventListener('mousedown', closeMenu);
+            document.removeEventListener('mousedown', closeMenuOnOutsideClick);
         }
     }, []);
 
     const toggleMenu = () => {
         setIsOpen((prev) => !prev);
-    }
+    };
 
-    const closeMenu = (e) => {
+    const closeMenuOnOutsideClick = (e) => {
         if(menuRef.current && !menuRef.current.contains(e.target) && e.target !== hamburgerRef.current) {
             setIsOpen(false);
         }
-    }
+    };
 
     const onMenuClick = (path) => {
-        toggleMenu();
+        setIsOpen(false);
         navigate(path);
-    }
+    };
 
     return (
     <div className='navBar-sticky'>
@@ -61,6 +61,6 @@ const NavBar = () => {
     </div>
     );
 
-}
+};
 
 export default NavBar;
