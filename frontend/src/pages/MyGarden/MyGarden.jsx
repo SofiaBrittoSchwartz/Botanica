@@ -1,11 +1,10 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import PlantCard from '../PlantCard/PlantCard';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import PlantCard from '../../components/PlantCard/PlantCard';
 
 const MyGarden = () => {
     const plants = useSelector((state) => state.garden);
     const plantsArray = Array.from(plants.values());
-
 
     return (
         <>
@@ -17,9 +16,8 @@ const MyGarden = () => {
                     ))
                 }
             </div>
-
         </>
-    )
-}
+    );
+};
 
 export default MyGarden;

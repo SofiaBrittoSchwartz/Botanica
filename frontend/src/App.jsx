@@ -1,17 +1,16 @@
-import './App.css'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import PlantList from './components/PlantList/PlantList'
-import NavBar from './components/NavBar/NavBar'
-import Login from './components/Login/Login'
-import SignUp from './components/SignUp/SignUp'
-import PlantInfo from './components/PlantInfo/PlantInfo'
-import MyGarden from './components/MyGarden/MyGarden'
-import Cart from './components/Cart/Cart'
-import Settings from './components/Settings/Settings'
+import './App.css';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Login from './pages/Login/Login';
+import SignUp from './pages/SignUp/SignUp';
+import MyGarden from './pages/MyGarden/MyGarden';
+import Cart from './pages/Cart/Cart';
+import Settings from './pages/Settings/Settings';
+import NavBar from './components/NavBar/NavBar';
+import PlantList from './components/PlantList/PlantList';
+import PlantInfo from './components/PlantInfo/PlantInfo';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-
   return (
     <>
       <BrowserRouter>
@@ -27,7 +26,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </>
-  )
-}
+  );
+};
 
 export default App;

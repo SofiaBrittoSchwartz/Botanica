@@ -1,7 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { debounce } from 'lodash';
+import { useDebounceValidation } from '../../utils/validation';
+import { signup } from '../../services/userService';
+import axios from 'axios';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -16,30 +19,19 @@ const SignUp = () => {
     mode: 'onChange'
   });
 
-  const reValidatePasswords = debounce(() => {
+  const reValidatePasswordsMatch = debounce(() => {
       trigger('confirmPassword');
     }, 100
   );
 
-  const validateName = (name) => {
-    if(name.length < 2) return "Name must be at least 2 characters";
-    if(!/^[A-Za-z\s]+$/.test(name)) return "Name should only contain letters";
-    return true;
-  }
+  const debounceValidation = useDebounceValidation(setValue, reValidatePasswordsMatch);
 
-  const debouncedValidation = useCallback(
-    debounce((name, value) => {
-      setValue(name, value, { shouldValidate: true });
-      if (name === 'password') {
-        reValidatePasswords();
-      }
-    }, 1000),
-    []
-  );
-
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (isValid) {
-      navigate('/', {replace: true});
+      let results = await signup(getValues());
+      console.log("\n\n\nRESULTS:")
+      console.log(results);
+      if(results.status === 200) navigate('/login', {replace: true});
     }
   };
 
@@ -64,8 +56,16 @@ const SignUp = () => {
                     placeholder="Enter your name"
                     {...register('name', { 
                       required: 'Name is required',
-                      validate: (value) => validateName(value)
+                      minLength: { 
+                        value: 2,
+                        message: 'Name must be at least 2 characters' 
+                      },
+                      pattern: {
+                        value: /^[A-Za-z\s]+$/,
+                        message: "Name should only contain letters"
+                      }
                     })}
+                    onChange={(e) => debounceValidation('name', e.target.value)}
                   />
                   {errors.name && <p style={{ color: 'red' }}>{errors.name.message}</p>}
                 </div>
@@ -80,10 +80,12 @@ const SignUp = () => {
                     placeholder="Enter your email"
                     {...register('email', {
                       required: 'Email is required',
-                      pattern: { value: /^[A-Za-z0-9]{3,}@[A-Za-z]{3,}\.[A-Za-z]{3,}$/, message: "Invalid email format. Please enter a valid email address."},
-                      // 
+                      pattern: { 
+                        value: /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]{1,64}@[A-Za-z]{3,}\.[A-Za-z]{2,}$/, 
+                        message: "Invalid email format. Please enter a valid email address."
+                      }
                     })}
-                    onChange={(e) => debouncedValidation('email', e.target.value)}
+                    onChange={(e) => debounceValidation('email', e.target.value)}
                   />
                   {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
                 </div>
@@ -101,7 +103,7 @@ const SignUp = () => {
                       minLength: { value: 6, message: 'Password must be at least 6 characters' },
                       validate: (value) => /[A-Z]/.test(value) && /[a-z]/.test(value) && /[0-9]/.test(value) && /[!@#$%^&*]/.test(value) || "Password must contain uppercase, lowercase, a number, and a special character"
                     })}
-                    onChange={(e) => debouncedValidation('password', e.target.value)}
+                    onChange={(e) => debounceValidation('password', e.target.value)}
                   />
                   {errors.password && <p style={{ color: 'red' }}>{errors.password.message}</p>}
                 </div>
@@ -118,7 +120,7 @@ const SignUp = () => {
                       required: 'Please confirm your password',
                       validate: (value) => value === getValues('password') || 'Passwords do not match',
                     })}
-                    onChange={(e) => debouncedValidation('confirmPassword', e.target.value)}
+                    onChange={(e) => debounceValidation('confirmPassword', e.target.value)}
                   />
                   {errors.confirmPassword && <p style={{ color: 'red' }}>{errors.confirmPassword.message}</p>}
                 </div>
@@ -126,6 +128,12 @@ const SignUp = () => {
                   <button type="submit" disabled={isSubmitting || !isValid} className="btn btn-success">
                     {isSubmitting ? 'Submitting' : 'Sign Up'}
                   </button>
+                </div>
+                <div className="text-center">
+                  <p className="text-muted mb-0 mt-2">
+                    Already have an account?
+                    <Link to="/login" className="btn btn-link align-baseline">Log In</Link>
+                  </p>
                 </div>
               </form>
             </div>
@@ -136,4 +144,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp
+export default SignUp;
