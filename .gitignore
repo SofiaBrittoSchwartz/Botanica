@@ -18,6 +18,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Local env files
+.env
 *.local
 
 # Editor directories and files
