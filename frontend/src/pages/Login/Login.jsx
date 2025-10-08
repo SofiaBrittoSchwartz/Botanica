@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDebounceValidation } from '../../utils/validation';
+import { login } from '../../services/userService';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
@@ -10,16 +11,18 @@ const Login = () => {
     register,
     handleSubmit,
     setValue,
+    getValues,
     formState: { errors, isSubmitting, isValid },
-  } = useForm({ 
-    mode: 'onChange' 
+  } = useForm({
+    mode: 'onChange'
   });
 
   const debounceValidation = useDebounceValidation(setValue);
 
-  const onSubmit = (data) => {
-    console.log('Login data:', data);
-    navigate('/', {replace: true});
+  const onSubmit = async () => {
+    console.log('Login.jsx - Login data:', getValues());
+    let results = await login(getValues());
+    if(results.status === 200) navigate('/', {replace: true});
   };
 
   return (
@@ -79,10 +82,10 @@ const Login = () => {
                 </div>
               </form>
               <div className="text-center">
-                  <p className="text-muted mb-0 mt-2">
-                    Don't have an account?
-                    <Link to={'/signup'} className="btn btn-link align-baseline">Sign up</Link>
-                  </p>
+                <p className="text-muted mb-0 mt-2">
+                  Don't have an account?
+                  <Link to={'/signup'} className="btn btn-link align-baseline">Sign up</Link>
+                </p>
               </div>
             </div>
           </div>
