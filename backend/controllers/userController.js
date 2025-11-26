@@ -37,4 +37,8 @@ const loginUser = async (req, res) => {
    }).json({message: "Login successful"});
 }
 
-module.exports = { registerUser, loginUser };
+const getCurrentUser = async (req, res) => {
+    res.json({ id: req.user.id, name: req.user.name, email: req.user.email });
+}
+
+module.exports = { registerUser, loginUser, getCurrentUser };

@@ -1,5 +1,6 @@
 import './App.css';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import MyGarden from './pages/MyGarden/MyGarden';
@@ -14,15 +15,17 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <NavBar/>
+        <NavBar />
         <Routes>
-          <Route path='/' element={<PlantList/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/signup' element={<SignUp/>}/>
-          <Route path='/plantinfo/:id' element={<PlantInfo/>}/>
-          <Route path='/mygarden' element={<MyGarden/>}/>
-          <Route path='/cart' element={<Cart/>}/>
-          <Route path='/settings' element={<Settings/>}/>
+          <Route path='/' element={<PlantList />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<SignUp />} />
+          <Route path='/plantinfo/:id' element={<PlantInfo />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path='/mygarden' element={<MyGarden />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/settings' element={<Settings />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
