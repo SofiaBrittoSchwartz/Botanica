@@ -1,6 +1,6 @@
 .plantList {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
     justify-content: space-around;
-    align-items: left;
+    gap: 1rem;
 }

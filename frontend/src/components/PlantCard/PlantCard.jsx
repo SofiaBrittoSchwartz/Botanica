@@ -1,47 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './PlantCard.css';
 
 const PlantCard = (props) => {
     const plant = props.plant;
-
-    const [maxWidth, setMaxWidth] = useState(200);
-
-    useEffect(() => {
-            setMaxWidth(plant.width);
-    }, []);
+    const isAuthenticated = props.isAuthenticated;
+    const dispatch = useDispatch();
+    const inGarden = useSelector((state) => state.garden.has(plant.id));
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     function getThumbnail(plant) {
         const thumbnail = plant?.default_image?.thumbnail;
-
-        if(!thumbnail) console.info(`Warning: The image for the ${plant.common_name} was not found.`);
-
         return thumbnail || 'https://placehold.co/200x200?text=This%20is%20a%20tree';
     }
 
+    function handleAddToGarden(e) {
+        e.stopPropagation();
+        if (!inGarden) {
+            dispatch({ type: 'addToGarden', payload: { item: plant } });
+        }
+    }
+
     return (
-        <div 
-            className="plantCard" 
-            key={plant.id} 
-            onClick={props.onChildClick} 
-            style={{maxWidth: `${maxWidth}px`}}
+        <div
+            className="plantCard"
+            key={plant.id}
+            onClick={props.onChildClick}
         >
-            <img 
-                className="plantCard-image" 
-                src={getThumbnail(plant)} 
-                alt="Plant thumbnail"
-            />
+            <div className="plantCard-image-wrapper">
+                {!imageLoaded && <div className="plantCard-image-skeleton" />}
+                <img
+                    className="plantCard-image"
+                    style={{ display: imageLoaded ? 'block' : 'none' }}
+                    src={getThumbnail(plant)}
+                    alt="Plant thumbnail"
+                    onLoad={() => setImageLoaded(true)}
+                    onError={(e) => {
+                        e.target.src = 'https://placehold.co/200x200?text=This+is+a+plant';
+                        setImageLoaded(true);
+                    }}
+                />
+                {isAuthenticated && imageLoaded && (
+                    <button
+                        className={`plantCard-garden-btn ${inGarden ? 'in-garden' : ''}`}
+                        onClick={handleAddToGarden}
+                        title="Add to Your Garden"
+                        aria-label="Add to Your Garden"
+                    >
+                        {inGarden ? '✓' : '+'}
+                    </button>
+                )}
+            </div>
             <div className="plantCard-info">
                 <h5>{plant.common_name}</h5>
-                <div>
-                    <div className="plantCard-btn-container">
-                        <button className="plantCard-add-button" aria-label="Add to Cart">+</button>
-                        <span>Add to Cart</span>
-                    </div>
-                    <div className="plantCard-btn-container">
-                        <button className="plantCard-add-button" aria-label="Add to Garden">+</button>
-                        <span>Add to Garden</span>
-                    </div>
-                </div>
             </div>
         </div>
     );

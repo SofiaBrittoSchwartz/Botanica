@@ -4,7 +4,6 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
 import MyGarden from './pages/MyGarden/MyGarden';
-import Cart from './pages/Cart/Cart';
 import Settings from './pages/Settings/Settings';
 import NavBar from './components/NavBar/NavBar';
 import PlantList from './components/PlantList/PlantList';
@@ -23,7 +22,6 @@ function App() {
           <Route path='/plantinfo/:id' element={<PlantInfo />} />
           <Route element={<ProtectedRoute />}>
             <Route path='/mygarden' element={<MyGarden />} />
-            <Route path='/cart' element={<Cart />} />
             <Route path='/settings' element={<Settings />} />
           </Route>
         </Routes>

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import BotanicaLogo from '../../assets/BotanicaLogo.png';
 import SearchIcon from '../../assets/search_icon.svg';
-import CartIcon from '../../assets/cart_icon.png';
 import GardenIcon from '../../assets/garden_icon.png';
 import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
@@ -50,9 +49,6 @@ const NavBar = () => {
             <div className='navBar-right'>
                 <Link to={'/myGarden'}>
                     <img src={GardenIcon} className="navBar-gardenIcon" alt="Icon of a watering can over a small plant"/>
-                </Link>
-                <Link to={'/cart'}>
-                    <img src={CartIcon} className="navBar-cartIcon" alt="Icon of a shopping cart"/>
                 </Link>
                 <img src={SearchIcon} className="navBar-searchIcon" alt="Search Icon"/>
             </div>

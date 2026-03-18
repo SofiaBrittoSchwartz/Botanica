@@ -16,11 +16,6 @@ app.use(cors({
     credentials: true,
 }));
 
-// Auth protected routes
-app.get('/', verifyToken, (req, res) => {
-    res.json({ message: `Welcome user ${req.user.id}`, user: req.user });
-});
-
 // Other routers
 app.use('/api/users', userRoutes);
 

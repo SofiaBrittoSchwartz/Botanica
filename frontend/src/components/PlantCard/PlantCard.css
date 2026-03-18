@@ -4,6 +4,8 @@
     align-items: center;
     padding: 5px;
     cursor: pointer;
+    width: 200px;
+    height: 100%;
 }
 
 .plantCard:hover {
@@ -22,33 +24,60 @@
     width: 100%;
 }
 
+.plantCard-image-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 .plantCard-image {
     max-width: 100%;
+    display: block;
 }
 
-.plantCard-btn-container {
-    margin-left: 20%;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.plantCard-image-skeleton {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s infinite;
 }
 
-.plantCard-btn-container span {
-    line-height: 1.5;
+@keyframes skeleton-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
-.plantCard-add-button {
-    width: 1rem;
-    height: 1rem;
+.plantCard-garden-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 1.6rem;
+    height: 1.6rem;
     border-radius: 50%;
-    border: 1px solid #ccc;
-    background-color: #fff;
+    border: 2px solid #fff;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: bold;
-    line-height: 1;
-    padding: 0;
+    line-height: 0;
+    padding: 0 0 3px 0;
+    color: #333;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.plantCard-garden-btn:hover {
+    background-color: #228B22;
+    color: #fff;
+    border-color: #228B22;
+}
+
+.plantCard-garden-btn.in-garden {
+    background-color: #228B22;
+    color: #fff;
+    border-color: #228B22;
+    cursor: default;
 }
