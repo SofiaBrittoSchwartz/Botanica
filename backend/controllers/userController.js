@@ -29,10 +29,12 @@ const loginUser = async (req, res) => {
        { expiresIn: '1h' }
    );
 
+   const isProduction = process.env.NODE_ENV === "production";
+   
    res.cookie("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    secure: isProduction,   // HTTPS only in production; false in development to allow HTTP
+    sameSite: isProduction ? "strict" : "lax",
     maxAge: 60 * 60 * 1000
    }).json({message: "Login successful"});
 }
