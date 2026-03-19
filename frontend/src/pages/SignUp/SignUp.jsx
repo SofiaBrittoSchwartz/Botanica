@@ -1,10 +1,8 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 import { debounce } from 'lodash';
 import { useDebounceValidation } from '../../utils/validation';
 import { signup } from '../../services/userService';
-import axios from 'axios';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -27,10 +25,9 @@ const SignUp = () => {
   const debounceValidation = useDebounceValidation(setValue, reValidatePasswordsMatch);
 
   const onSubmit = async () => {
+    console.log("SignUp.js - Submitting SignUp Form");
     if (isValid) {
       let results = await signup(getValues());
-      console.log("\n\n\nRESULTS:")
-      console.log(results);
       if(results.status === 200) navigate('/login', {replace: true});
     }
   };
