@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+const plantRoutes = require('./routes/plantRoutes');
 const userRoutes = require('./routes/userRoutes');
 const verifyToken = require('./middleware/auth');
 
@@ -18,6 +19,7 @@ app.use(cors({
 
 // Other routers
 app.use('/api/users', userRoutes);
+app.use('/api/plants', plantRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
