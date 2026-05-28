@@ -1,12 +1,23 @@
 import axios from 'axios';
+import mockData from '../data/mockData.json';
 
 const API_URL = 'http://localhost:5001/api/plants';
+const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true';
 
-/**
- * Fetch a paginated, optionally filtered list of plants.
- * @param {Object} params - { page, limit, search, watering, cycle }
- */
 export async function getPlants(params = {}) {
+    if (DEMO_MODE) {
+        let plants = mockData.data;
+        if (params.search) {
+            const re = new RegExp(`\\b${params.search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
+            plants = plants.filter(p =>
+                re.test(p.common_name) || p.scientific_name.some(n => re.test(n))
+            );
+        }
+        if (params.watering) plants = plants.filter(p => p.watering === params.watering);
+        if (params.cycle) plants = plants.filter(p => p.cycle === params.cycle);
+        return { success: true, data: plants, pagination: null };
+    }
+
     try {
         const response = await axios.get(API_URL, { params });
         return { success: true, data: response.data.data, pagination: response.data.pagination };
@@ -21,11 +32,14 @@ export async function getPlants(params = {}) {
     }
 }
 
-/**
- * Fetch a single plant by its MongoDB _id.
- * @param {string} id - MongoDB ObjectId string
- */
 export async function getPlantById(id) {
+    if (DEMO_MODE) {
+        const plant = mockData.data.find(p => String(p.id) === String(id));
+        return plant
+            ? { success: true, data: plant }
+            : { success: false, data: null, message: 'Plant not found' };
+    }
+
     try {
         const response = await axios.get(`${API_URL}/${id}`);
         return { success: true, data: response.data };

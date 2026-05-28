@@ -13,10 +13,13 @@ const PlantList = () => {
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [pagination, setPagination] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true';
+    const [isAuthenticated, setIsAuthenticated] = useState(DEMO_MODE);
 
     useEffect(() => {
-        getCurrentUser().then(({ authenticated }) => setIsAuthenticated(authenticated));
+        if (!DEMO_MODE) {
+            getCurrentUser().then(({ authenticated }) => setIsAuthenticated(authenticated));
+        }
         loadPlants();
     }, [page]);
 
