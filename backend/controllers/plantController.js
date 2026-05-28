@@ -7,7 +7,13 @@ const getPlants = async (req, res) => {
         const skip = (page - 1) * limit;
 
         const filter = {};
-        if (req.query.search) filter.$text = { $search: req.query.search };
+        if (req.query.search) {
+            const escaped = req.query.search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            filter.$or = [
+                { common_name: { $regex: `\\b${escaped}`, $options: 'i' } },
+                { scientific_name: { $regex: `\\b${escaped}`, $options: 'i' } }
+            ];
+        }
         if (req.query.watering) filter.watering = req.query.watering;
         if (req.query.cycle) filter.cycle = req.query.cycle;
 

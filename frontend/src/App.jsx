@@ -24,6 +24,7 @@ function App() {
             <Route path='/mygarden' element={<MyGarden />} />
             <Route path='/settings' element={<Settings />} />
           </Route>
+          <Route path='*' element={<div><h1>404 Page not found</h1></div>} />
         </Routes>
       </BrowserRouter>
     </>

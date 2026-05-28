@@ -36,7 +36,14 @@ const PlantList = () => {
         } else {
             // Fallback to mock data while backend is empty or unavailable
             console.warn('Backend unavailable or empty — using mockData fallback');
-            setPlantList(mockData.data);
+            if (searchTerm) {
+                const re = new RegExp(`\\b${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
+                setPlantList(mockData.data.filter(p =>
+                    re.test(p.common_name) || p.scientific_name.some(n => re.test(n))
+                ));
+            } else {
+                setPlantList(mockData.data);
+            }
             setPagination(null);
         }
         setLoading(false);
