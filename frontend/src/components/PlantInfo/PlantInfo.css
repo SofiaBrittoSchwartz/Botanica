@@ -1,0 +1,380 @@
+.plant-info-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Header */
+.plant-info-header {
+    position: relative;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.plant-info-title {
+    padding: 0 60px;
+}
+
+.plant-name {
+    font-size: 2.75rem;
+    font-weight: 400;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #1a1a1a;
+    margin-bottom: 0.25rem;
+}
+
+.plant-scientific {
+    font-style: italic;
+    color: #888;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.plant-back-btn {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: none;
+    color: #2d6a4f;
+    border: 2px solid #2d6a4f;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+}
+
+.plant-back-btn:hover {
+    background: #2d6a4f;
+    color: #fff;
+}
+
+.plant-add-btn {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: none;
+    color: #2d6a4f;
+    border: 2px solid #2d6a4f;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.plant-add-btn:hover {
+    background: #2d6a4f;
+    color: #fff;
+}
+
+.plant-add-btn.in-garden {
+    background: #2d6a4f;
+    color: #fff;
+    border-color: #2d6a4f;
+}
+
+.plant-add-btn.in-garden:hover {
+    background: none;
+    color: #2d6a4f;
+}
+
+.plant-add-btn .garden-btn-hovered {
+    display: none;
+}
+
+.plant-add-btn.in-garden.just-added:hover {
+    background: #2d6a4f;
+    color: #fff;
+}
+
+.plant-add-btn.in-garden.just-added:hover .garden-btn-default {
+    display: inline;
+}
+
+.plant-add-btn.in-garden.just-added:hover .garden-btn-hovered {
+    display: none;
+}
+
+.plant-add-btn.in-garden:hover .garden-btn-default {
+    display: none;
+}
+
+.plant-add-btn.in-garden:hover .garden-btn-hovered {
+    display: inline;
+}
+
+
+/* Main layout */
+.plant-info-content {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.plant-info-image-wrap {
+    flex: 0 0 45%;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.plant-info-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Right panel */
+.plant-info-panel {
+    flex: 1;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.panel-section {
+    padding: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.panel-section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 1.25rem;
+}
+
+/* Care Snapshot */
+.snapshot-tiles {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.snapshot-tile {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.4rem;
+}
+
+.snapshot-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #e8f5ee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2d6a4f;
+    flex-shrink: 0;
+}
+
+.snapshot-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.tile-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.tile-sub {
+    font-size: 0.72rem;
+    color: #777;
+    line-height: 1.35;
+}
+
+/* Environment Ranges */
+.env-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.env-row {
+    display: grid;
+    grid-template-columns: 20px 120px 1fr 130px;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.env-icon {
+    color: #2d6a4f;
+    display: flex;
+    align-items: center;
+}
+
+.env-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.env-label {
+    font-size: 0.875rem;
+    color: #333;
+}
+
+.env-bar-track {
+    height: 8px;
+    background: #e8e8e8;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.env-bar-fill {
+    height: 100%;
+    background: #2d6a4f;
+    border-radius: 4px;
+}
+
+.env-value {
+    font-size: 0.78rem;
+    color: #333;
+    text-align: right;
+    line-height: 1.4;
+}
+
+/* Watering History */
+.history-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.history-row {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.history-row:last-child {
+    border-bottom: none;
+}
+
+.history-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #2d6a4f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2d6a4f;
+    flex-shrink: 0;
+}
+
+.history-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.history-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.history-date {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.history-type {
+    font-size: 0.78rem;
+    color: #999;
+}
+
+.history-notes {
+    font-size: 0.78rem;
+    color: #555;
+    text-align: right;
+    max-width: 160px;
+    line-height: 1.35;
+}
+
+.view-history-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    border-top: 1px solid #f0f0f0;
+    padding: 0.9rem 0 0;
+    margin-top: 0.5rem;
+    color: #2d6a4f;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.view-history-btn:hover {
+    text-decoration: underline;
+}
+
+.chevron {
+    display: inline-block;
+    font-size: 1.2rem;
+    transform: rotate(90deg);
+    transition: transform 0.2s;
+}
+
+.chevron-up {
+    transform: rotate(-90deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .plant-info-content {
+        flex-direction: column;
+    }
+
+    .plant-info-image-wrap {
+        flex: none;
+        width: 100%;
+    }
+
+    .plant-info-panel {
+        max-height: none;
+    }
+
+    .plant-name {
+        font-size: 2rem;
+    }
+
+    .env-row {
+        grid-template-columns: 20px 90px 1fr 100px;
+        gap: 0.5rem;
+    }
+
+    .snapshot-tiles {
+        flex-wrap: wrap;
+    }
+
+    .snapshot-tile {
+        flex: 0 0 calc(50% - 0.25rem);
+    }
+}
