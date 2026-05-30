@@ -4,3 +4,36 @@
     justify-content: space-around;
     gap: 1rem;
 }
+
+.plantList-search {
+    grid-column: 1 / -1;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.plantList-input-wrap {
+    position: relative;
+    flex: 1;
+}
+
+.plantList-input-wrap .form-control {
+    padding-right: 2rem;
+}
+
+.plantList-clear-btn {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+}
+
+.plantList-clear-btn:hover {
+    color: #333;
+}
