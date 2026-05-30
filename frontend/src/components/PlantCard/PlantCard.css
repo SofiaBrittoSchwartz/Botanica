@@ -79,5 +79,37 @@
     background-color: #228B22;
     color: #fff;
     border-color: #228B22;
-    cursor: default;
+    cursor: pointer;
+}
+
+.plantCard-garden-btn.in-garden:hover {
+    background-color: #fff;
+    color: #228B22;
+    border-color: #228B22;
+}
+
+.garden-btn-hovered {
+    display: none;
+}
+
+.plantCard-garden-btn.in-garden.just-added:hover {
+    background-color: #228B22;
+    color: #fff;
+    border-color: #228B22;
+}
+
+.plantCard-garden-btn.in-garden.just-added:hover .garden-btn-default {
+    display: inline;
+}
+
+.plantCard-garden-btn.in-garden.just-added:hover .garden-btn-hovered {
+    display: none;
+}
+
+.plantCard-garden-btn.in-garden:hover .garden-btn-default {
+    display: none;
+}
+
+.plantCard-garden-btn.in-garden:hover .garden-btn-hovered {
+    display: inline;
 }
