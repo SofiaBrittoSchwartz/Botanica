@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import PlantCard from '../PlantCard/PlantCard';
 import { getPlants } from '../../services/plantService';
 import { getCurrentUser } from '../../services/userService';
-import mockData from '../../data/mockData.json';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './PlantList.css';
 
@@ -31,20 +30,11 @@ const PlantList = () => {
         const searchTerm = searchOverride !== undefined ? searchOverride : search;
         const result = await getPlants({ page, limit: 20, search: searchTerm || undefined });
 
-        if (result.success && result.data.length > 0) {
+        if (result.success) {
             setPlantList(result.data);
             setPagination(result.pagination);
         } else {
-            // Fallback to mock data while backend is empty or unavailable
-            console.warn('Backend unavailable or empty — using mockData fallback');
-            if (searchTerm) {
-                const re = new RegExp(`\\b${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
-                setPlantList(mockData.data.filter(p =>
-                    re.test(p.common_name) || p.scientific_name.some(n => re.test(n))
-                ));
-            } else {
-                setPlantList(mockData.data);
-            }
+            setPlantList([]);
             setPagination(null);
         }
         setLoading(false);
@@ -100,6 +90,9 @@ const PlantList = () => {
                     </div>
                     <button type="submit" className="btn btn-success">Search</button>
                 </form>
+                {!loading && plantList.length === 0 && (
+                    <p className="plantList-empty">No plants found.</p>
+                )}
                 {plantList.map(plant => (
                     <PlantCard
                         plant={plant}
