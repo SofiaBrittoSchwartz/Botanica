@@ -54,6 +54,11 @@ const PlantInfo = () => {
     const gardenState = useGardenState(plant || {});
 
     useEffect(() => {
+        document.body.classList.add('no-scroll');
+        return () => document.body.classList.remove('no-scroll');
+    }, []);
+
+    useEffect(() => {
         getCurrentUser().then(({ authenticated }) => setIsAuthenticated(authenticated));
         loadPlant();
     }, [id]);

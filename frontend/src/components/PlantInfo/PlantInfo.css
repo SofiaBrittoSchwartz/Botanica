@@ -141,6 +141,7 @@
     border-radius: 12px;
     overflow-y: auto;
     background: #fff;
+    overscroll-behavior: contain;
 }
 
 .panel-section {
