@@ -15,11 +15,6 @@ const PlantCard = (props) => {
         setJustAdded(true);
     }
 
-    function getThumbnail(plant) {
-        const thumbnail = plant?.default_image?.thumbnail;
-        return thumbnail || 'https://placehold.co/200x200?text=This%20is%20a%20tree';
-    }
-
     return (
         <div
             className="plantCard"
@@ -31,7 +26,7 @@ const PlantCard = (props) => {
                 <img
                     className="plantCard-image"
                     style={{ display: imageLoaded ? 'block' : 'none' }}
-                    src={getThumbnail(plant)}
+                    src={plant.image_url}
                     alt="Plant thumbnail"
                     onLoad={() => setImageLoaded(true)}
                     onError={(e) => {

@@ -54,6 +54,11 @@ const PlantInfo = () => {
     const gardenState = useGardenState(plant || {});
 
     useEffect(() => {
+        document.body.classList.add('no-scroll');
+        return () => document.body.classList.remove('no-scroll');
+    }, []);
+
+    useEffect(() => {
         getCurrentUser().then(({ authenticated }) => setIsAuthenticated(authenticated));
         loadPlant();
     }, [id]);
@@ -85,12 +90,7 @@ const PlantInfo = () => {
 
     const { inGarden, addToGarden, removeFromGarden } = gardenState;
 
-    const imageUrl =
-        plant.default_image?.regular_url ||
-        plant.default_image?.medium_url ||
-        plant.default_image?.small_url ||
-        plant.default_image?.thumbnail ||
-        'https://placehold.co/600x800?text=No+Image';
+    const imageUrl = plant.image_url || 'https://placehold.co/600x800?text=This+is+a+plant';
 
     const hasTemp = plant.temperature?.min_celsius != null;
     const hasHumidity = plant.humidity?.min_percent != null;
@@ -146,7 +146,12 @@ const PlantInfo = () => {
                     ref={imageWrapRef}
                     style={imageMaxHeight ? { maxHeight: `${imageMaxHeight}px` } : {}}
                 >
-                    <img src={imageUrl} alt={plant.common_name} className="plant-info-img" />
+                    <img
+                        src={imageUrl}
+                        alt={plant.common_name}
+                        className="plant-info-img"
+                        onError={(e) => { e.target.src = 'https://placehold.co/600x800?text=This+is+a+plant'; }}
+                    />
                 </div>
 
                 <div

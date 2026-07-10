@@ -4,6 +4,13 @@ import mockData from '../data/mockData.json';
 const API_URL = 'http://localhost:5001/api/plants';
 const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true';
 
+function normalizeImagePath(plant) {
+    const url = plant.image_url;
+    if (!url?.startsWith('/plant-images/')) return plant;
+    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+    return { ...plant, image_url: base + url };
+}
+
 export async function getPlants(params = {}) {
     if (DEMO_MODE) {
         let plants = mockData.data;
@@ -15,7 +22,7 @@ export async function getPlants(params = {}) {
         }
         if (params.watering) plants = plants.filter(p => p.watering === params.watering);
         if (params.cycle) plants = plants.filter(p => p.cycle === params.cycle);
-        return { success: true, data: plants, pagination: null };
+        return { success: true, data: plants.map(normalizeImagePath), pagination: null };
     }
 
     try {
@@ -36,7 +43,7 @@ export async function getPlantById(id) {
     if (DEMO_MODE) {
         const plant = mockData.data.find(p => String(p.id) === String(id));
         return plant
-            ? { success: true, data: plant }
+            ? { success: true, data: normalizeImagePath(plant) }
             : { success: false, data: null, message: 'Plant not found' };
     }
 

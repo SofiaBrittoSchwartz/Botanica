@@ -4,3 +4,7 @@
   padding: 10px;
   text-align: center;
 }
+
+body.no-scroll {
+  overflow: hidden;
+}

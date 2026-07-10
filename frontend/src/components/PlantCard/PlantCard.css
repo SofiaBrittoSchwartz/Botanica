@@ -27,11 +27,17 @@
 .plantCard-image-wrapper {
     position: relative;
     width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 8px;
 }
 
 .plantCard-image {
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
     display: block;
+    object-fit: cover;
+    object-position: center;
 }
 
 .plantCard-image-skeleton {
